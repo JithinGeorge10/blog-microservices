@@ -31,7 +31,7 @@ const addPost = async (req,res) => {
             post
         })
         await addPost.save()
-        produce('add-post',req.body)
+        await produce('add-post',JSON.stringify(req.body))
         res.status(200).send({message:'Post added successfully'})
       
     } catch (error) {
