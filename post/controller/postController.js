@@ -1,5 +1,6 @@
 const userModel=require('../model/userModel.js')
-
+const postModel=require('../model/postModel.js');
+const produce = require('../kafka/producer.js');
 
 const getPost= async (req,res) => {
     try {
@@ -20,6 +21,25 @@ const addUser = async (user) => {
     }
 }
 
+
+const addPost = async (req,res) => {
+    try {
+        console.log(req.body)
+        const {userId,post}=req.body
+        const addPost =new postModel({
+            userId,
+            post
+        })
+        await addPost.save()
+        produce('add-post',req.body)
+        res.status(200).send({message:'Post added successfully'})
+      
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 module.exports = {
-    addUser,getPost
+    addUser,getPost,addPost
 }
