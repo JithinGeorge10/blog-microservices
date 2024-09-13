@@ -1,4 +1,4 @@
-const produce=require('../kafka/producer.js')
+const produce = require('../kafka/producer.js')
 const userCollection = require('../model/userModel.js')
 
 const signup = async (req, res) => {
@@ -11,7 +11,14 @@ const signup = async (req, res) => {
             res.status(409).send({ message: 'user already exists' })
         }
         const userDetails = await userCollection.create({ username, email, password, phone })
-        await produce('add-user',JSON.stringify(req.body))
+
+        try {
+            await produce('add-user', JSON.stringify(req.body))
+        } catch (error) {
+            console.log('Kafka producer add-user error')
+            console.log(error.message)
+        }
+
         res.status(200).send({ message: 'user added successfully', user: userDetails })
     } catch (error) {
         console.log(error);

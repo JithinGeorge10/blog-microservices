@@ -1,8 +1,12 @@
-const {kafka}=require('kafkajs')
+const { Kafka } = require("kafkajs");
 
-const kafka=new kafka({
-    clientId:"auth-service",
-    brokers:['kafka:9092']
+const kafka = new Kafka({
+    clientId: "auth-service",
+    brokers: ['localhost:9092']
 })
 
-module.exports=kafka
+module.exports = kafka
+
+
+
+

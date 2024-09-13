@@ -1,14 +1,18 @@
 const kafka = require('./kafkaConfig')
+const { Partitioners } = require('kafkajs')
+
 
 async function produce(topic, value) {
     try {
-        const producer = kafka.producer()
+        const producer = kafka.producer({createPartitioner: Partitioners.LegacyPartitioner})
         await producer.connect()
         await producer.send({
             topic,
-            messages: [{ value: message }]
+            messages: [{
+                value
+            }]
         })
-        await produce.disconnect()
+        await producer.disconnect()
     } catch (error) {
         console.log(error);
     }
