@@ -37,7 +37,17 @@ const addComment = async (req, res) => {
         console.log(error)
     }
 }
+const getComment = async (req, res) => {
+    try {
+      const commentDetails=await commentModel.find()
+      res.send(commentDetails)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 
 module.exports = {
-    addPost, addUser, addComment
+    addPost, addUser, addComment,getComment
 }
