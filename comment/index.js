@@ -8,6 +8,7 @@ const app=express()
 dotenv.config()
 connect()
 app.use(express.json())
+app.use(router)
 consume()
 
 app.listen(3002,()=>{
