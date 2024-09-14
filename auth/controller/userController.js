@@ -35,7 +35,7 @@ const login = async (req, res) => {
         if (existingUser.password !== password) {
             res.status(401).send({ message: 'incorrect password' })
         }
-        res.status(200).send({ message: 'login successfull', user: existingUser })
+        res.status(200).send({ message: 'login successfull', name:existingUser.username,email:existingUser.email,phone:existingUser.phone  })
     } catch (error) {
         console.log(error);
     }
