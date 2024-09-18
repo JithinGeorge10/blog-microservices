@@ -1,6 +1,6 @@
 const produce = require('../kafka/producer.js')
 const userCollection = require('../model/userModel.js')
-//sample
+
 const signup = async (req, res) => {
     try {
         const { username, email, password, phone } = req.body
