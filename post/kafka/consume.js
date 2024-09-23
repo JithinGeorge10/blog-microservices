@@ -1,3 +1,4 @@
+//kafka consume
 const { addUser } = require("../controller/postController.js");
 const kafka = require("./kafkaConfig");
 
@@ -31,4 +32,3 @@ async function consume() {
 
 module.exports = consume;
 
-///sample
